@@ -142,25 +142,24 @@
         uee-container { width: 100%; background: rgba(255,255,255,0.03); padding: 20px 0; overflow: hidden; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin-top: -50px; }
         .marquee-container {
     width: 100%;
+    overflow: hidden;
     background: rgba(255, 255, 255, 0.03);
     padding: 20px 0;
-    overflow: hidden; /* Dışarı taşanları gizler */
     display: flex;
 }
 
 .marquee-content {
     display: flex;
-    width: max-content; /* İçerik ne kadar uzunsa o kadar genişle */
-    animation: scroll 20s linear infinite;
+    width: max-content;
+    animation: scroll 25s linear infinite;
 }
 
 .tech-item {
     display: flex;
     align-items: center;
-    padding: 0 40px; /* Gap yerine padding kullanıyoruz ki atlama yapmasın */
+    padding: 0 50px; /* Sabit boşluk */
     font-size: 1.5rem;
     color: #888;
-    font-weight: bold;
     white-space: nowrap;
 }
 
@@ -169,10 +168,10 @@
     color: #00f2ff;
 }
 
-/* SONSUZ DÖNGÜNÜN KALBİ BURASI */
+/* 3 grup yaptığımız için -33.33% olması pürüzsüz yapar */
 @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); } /* Listeyi tam ortasına kadar çeker ve başa döner */
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.3333%); }
 }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; width: 100%; max-width: 1200px; margin-top: 50px; }
         
@@ -294,12 +293,14 @@
             <div class="tech-item"><i class="fab fa-css3"></i> CSS3</div>
             <div class="tech-item"><i class="fab fa-unity"></i> Unity</div>
             <div class="tech-item"><i class="fas fa-cube"></i> <span data-en="Industrial Designing" data-tr="Endüstriyel Tasarım">Endüstriyel Tasarım </span> </div>
+            
             <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
             <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
             <div class="tech-item"><i class="fa-brands fa-figma"></i> FİGMA</div>
             <div class="tech-item"><i class="fab fa-css3"></i> CSS3</div>
             <div class="tech-item"><i class="fab fa-unity"></i> Unity</div>
             <div class="tech-item"><i class="fas fa-cube"></i> <span data-en="Industrial Designing" data-tr="Endüstriyel Tasarım">Endüstriyel Tasarım</span> </div>
+            
             <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
             <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
             <div class="tech-item"><i class="fa-brands fa-figma"></i> FİGMA</div>
