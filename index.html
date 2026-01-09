@@ -226,6 +226,23 @@
             .social-sidebar { display: none; } .cursor-dot, .cursor-outline { display: none; }
             body { cursor: auto; }
         }
+        /* Yetenekler bölümündeki kartları özel olarak düzeltir */
+        #skills .card {
+     height: auto; /* Sabit yüksekliği iptal et, içeriğe göre uzasın */
+     min-height: 250px; /* Çok küçülmesin diye minimum bir boy verelim */
+     display: flex; /* Esnek kutu modeli */
+     flex-direction: column; /* Alt alta sırala */
+     justify-content: center; /* Dikeyde tam ortala */
+     align-items: center; /* Yatayda tam ortala */
+     padding: 40px 20px; /* İçeriden biraz boşluk ver */
+    }
+
+        /* İkonların rengini ve efektini biraz daha belirgin yapalım */
+        #skills .card i {
+        font-size: 3rem;
+        margin-bottom: 25px;
+        text-shadow: 0 0 15px rgba(0, 242, 255, 0.5); /* Hafif neon parlaması */
+        }
     </style>
 </head>
 
