@@ -612,20 +612,20 @@
                 });
             }
         });
-        // Kart tıklama özelliği
-const skillCards = document.querySelectorAll('.card'); 
-cards.forEach(card => {
-  card.addEventListener('click', () => {
-    cards.forEach(c => c.classList.remove('active'));
-    card.classList.add('active');
-  });
-});
+     // Kart tıklama özelliği
+    const skillCards = document.querySelectorAll('.card'); 
+    
+    skillCards.forEach(card => {
+        card.addEventListener('click', () => {
+            skillCards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+        });
+    });
 
-    </script> </body>
-</html>
-    </script>
+  </script>
+
+  <footer>
+      <p style="color: #888;">&copy; 2026 Emirhan Üzgün | Tüm hakları saklıdır.</p>
+  </footer>
 </body>
-<footer>
-    <p style="color: #888;">&copy; 2026 Emirhan Üzgün | Tüm hakları saklıdır.</p>
-</footer>
 </html>
