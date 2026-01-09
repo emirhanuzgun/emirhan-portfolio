@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emirhan Üzgün | Portfolyo</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- TEMEL AYARLAR --- */
+        html {
+         scroll-behavior: smooth;
+        }   
+        :root {
+            /* Varsayılan (Karanlık) Tema Değişkenleri */
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-color: #00f2ff; /* Neon Mavi */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --card-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+            --canvas-gradient: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+        }
+
+        /* --- AYDINLIK MOD SINIFI --- */
+        body.light-mode {
+            --bg-color: #f0f2f5;
+            --text-color: #333333;
+            --glass-bg: rgba(255, 255, 255, 0.6); /* Daha belirgin beyaz cam */
+            --border-color: rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --canvas-gradient: radial-gradient(circle at center, #ffffff 0%, #dbe4eb 100%);
+        }
+
+        /* Aydınlık modda bazı özel metin renkleri */
+        body.light-mode .tech-item { color: #555 !important; }
+        body.light-mode .about-text { color: #555 !important; }
+        body.light-mode .card p { color: #666 !important; }
+        body.light-mode .card h3 { color: #000 !important; }
+        body.light-mode .logo::before, body.light-mode .logo::after { background: #f0f2f5; } /* Glitch arka planı */
+        body.light-mode .logo { color: #333; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; list-style: none; scroll-behavior: smooth; cursor: none; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease; /* Yumuşak geçiş */
+        }
+
+        /* Bulanıklık Sınıfı */
+        body.loading-blur main, body.loading-blur nav, body.loading-blur canvas, body.loading-blur section, body.loading-blur .social-sidebar {
+            filter: blur(15px);
+            opacity: 0.3;
+            transform: scale(0.98);
+            transition: all 0.8s ease-out;
+        }
+
+        /* --- SCROLL PROGRESS BAR --- */
+        #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 99999; background: transparent; }
+        #progress-bar { height: 100%; background: var(--accent-color); width: 0%; box-shadow: 0 0 10px var(--accent-color); }
+
+        /* --- PRELOADER --- */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--bg-color);
+            z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .counter-wrap { position: relative; overflow: hidden; }
+        .counter { font-size: 8rem; font-weight: 900; color: var(--text-color); font-family: 'Montserrat', sans-serif; line-height: 1; }
+        .counter-symbol { font-size: 2rem; color: var(--accent-color); position: absolute; top: 15px; right: -30px; }
+        .loader-line { width: 200px; height: 2px; background: #333; margin-top: 20px; position: relative; overflow: hidden; border-radius: 2px; }
+        .loader-line::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--accent-color); animation: loadLine 2s ease-in-out forwards; }
+        @keyframes loadLine { 0% { width: 0%; } 100% { width: 100%; } }
+
+        /* --- CURSOR --- */
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; }
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--accent-color); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(0, 242, 255, 0.5); transition: all 0.2s; }
+        body.hover-active .cursor-outline { width: 20px; height: 20px; background-color: rgba(0, 242, 255, 0.2); border-color: var(--accent-color); }
+
+        /* --- ARKA PLAN --- */
+        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: var(--canvas-gradient); transition: background 0.5s ease; }
+
+        /* --- NAV --- */
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border-color); transition: all 0.5s ease; }
+        body.light-mode nav { background: rgba(255, 255, 255, 0.8); } /* Light modda nav rengi */
+        
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        nav ul { display: flex; gap: 30px; }
+        nav a { color: #aaa; font-size: 0.9rem; font-weight: 500; transition: 0.3s; cursor: pointer; }
+        body.light-mode nav a { color: #555; }
+        nav a:hover { color: var(--accent-color); }
+        
+        /* Butonlar */
+        .lang-btn, .theme-btn { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); padding: 5px 15px; font-weight: bold; transition: 0.3s; cursor: pointer; border-radius: 5px; }
+        .lang-btn:hover, .theme-btn:hover { background: var(--accent-color); color: #fff; }
+        
+        .hamburger { display: none; cursor: pointer; z-index: 1001; }
+        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--text-color); }
+        
+        .mobile-menu { position: fixed; top: -100%; left: 0; width: 100%; height: 100vh; background: var(--bg-color); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.5s ease-in-out; }
+        .mobile-menu.active { top: 0; }
+        .mobile-menu li { margin: 20px 0; }
+        .mobile-menu a { font-size: 2rem; color: var(--text-color); font-weight: bold; }
+        .mobile-menu a:hover { color: var(--accent-color); }
+
+        .social-sidebar { position: fixed; left: 40px; bottom: 40px; display: flex; flex-direction: column; gap: 20px; align-items: center; z-index: 100; }
+        .social-icon { color: #aaa; font-size: 1.4rem; transition: 0.3s; cursor: pointer; }
+        body.light-mode .social-icon { color: #555; }
+        .social-icon:hover { color: var(--accent-color); transform: translateY(-3px) scale(1.1); }
+
+        /* --- SECTION GENEL --- */
+        section { min-height: 100vh; padding: 100px 50px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* --- RENKLİ BAŞLIK --- */
+        .hero-title { 
+            font-size: 6rem; 
+            font-weight: 900; 
+            line-height: 1.2; 
+            padding-bottom: 15px;
+            font-family: 'Coolvetica', 'Montserrat', sans-serif; 
+            margin-bottom: 20px; 
+            background: linear-gradient(to right, #00c6ff, #0072ff, #8a2be2, #ff00cc); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+
+        .typewriter-container { font-size: 2rem; color: var(--accent-color); font-weight: 700; height: 40px; display: flex; align-items: center; }
+        .cursor-blink { display: inline-block; width: 3px; height: 30px; background-color: var(--accent-color); margin-left: 5px; animation: blink 0.7s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        uee-container { width: 100%; background: rgba(255,255,255,0.03); padding: 20px 0; overflow: hidden; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin-top: -50px; }
+        .marquee-container {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px 0;
+    overflow: hidden; /* Dışarı taşanları gizler */
+    display: flex;
+}
+
+.marquee-content {
+    display: flex;
+    width: max-content; /* İçerik ne kadar uzunsa o kadar genişle */
+    animation: scroll 20s linear infinite;
+}
+
+.tech-item {
+    display: flex;
+    align-items: center;
+    padding: 0 40px; /* Gap yerine padding kullanıyoruz ki atlama yapmasın */
+    font-size: 1.5rem;
+    color: #888;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.tech-item i {
+    margin-right: 15px;
+    color: #00f2ff;
+}
+
+/* SONSUZ DÖNGÜNÜN KALBİ BURASI */
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); } /* Listeyi tam ortasına kadar çeker ve başa döner */
+}
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; width: 100%; max-width: 1200px; margin-top: 50px; }
+        
+        /* KART TASARIMI */
+        .card { 
+            background: var(--glass-bg); 
+            border: 1px solid var(--border-color); 
+            border-radius: 15px; 
+            padding: 30px; 
+            position: relative; 
+            transform-style: preserve-3d; 
+            transform: perspective(1000px); 
+            transition: transform 0.1s, box-shadow 0.3s; 
+            cursor: none; 
+            height: 350px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            overflow: hidden; 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .card-content { transform: translateZ(30px); pointer-events: none; }
+        .card h3 { font-size: 2rem; margin-bottom: 10px; color: #fff; transition: color 0.5s; }
+        .card p { color: #aaa; margin-bottom: 20px; font-size: 0.9rem; transition: color 0.5s; }
+        .card:hover { border-color: var(--accent-color); box-shadow: var(--card-shadow); }
+        
+        /* Hakkımda Özel Stil */
+        .about-text { font-size: 1.1rem; line-height: 1.8; color: #ccc; transition: color 0.5s; }
+        .about-highlight { color: var(--accent-color); font-weight: bold; }
+
+        #back-to-top { position: fixed; bottom: 30px; right: 30px; background: var(--glass-bg); border: 1px solid var(--accent-color); color: var(--accent-color); width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; cursor: none; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 99; }
+        #back-to-top.show { opacity: 1; pointer-events: auto; }
+        #back-to-top:hover { background: var(--accent-color); color: #fff; box-shadow: 0 0 15px var(--accent-color); }
+        .glitch-wrapper { position: relative; }
+        
+        /* --- LOGO VE GLITCH --- */
+        .logo { font-size: 1.2rem; font-weight: 900; letter-spacing: 1px; color: #fff; position: relative; cursor: pointer; white-space: nowrap; transition: color 0.5s; }
+        .logo::before, .logo::after { content: 'Emirhan Üzgün'; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #050505; transition: background 0.5s; }
+        .logo::before { left: 2px; text-shadow: -1px 0 red; clip: rect(24px, 550px, 90px, 0); animation: glitch-anim-2 3s infinite linear alternate-reverse; }
+        .logo::after { left: -2px; text-shadow: -1px 0 blue; clip: rect(85px, 550px, 140px, 0); animation: glitch-anim 2.5s infinite linear alternate-reverse; }
+        @keyframes glitch-anim { 0% { clip: rect(10px, 9999px, 31px, 0); } 100% { clip: rect(5px, 9999px, 95px, 0); } }
+        @keyframes glitch-anim-2 { 0% { clip: rect(65px, 9999px, 100px, 0); } 100% { clip: rect(10px, 9999px, 45px, 0); } }
+        
+        footer { padding: 50px; text-align: center; border-top: 1px solid var(--border-color); background: #000; }
+        body.light-mode footer { background: #e0e0e0; }
+        .mail-link { font-size: 2rem; color: var(--accent-color); font-weight: bold; cursor: pointer; }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem; } nav { padding: 20px 30px; }
+            .nav-right ul { display: none; } .hamburger { display: block; }
+            .social-sidebar { display: none; } .cursor-dot, .cursor-outline { display: none; }
+            body { cursor: auto; }
+        }
+    </style>
+</head>
+
+<body class="loading-blur">
+
+    <div id="progress-container"><div id="progress-bar"></div></div>
+    
+    <div id="preloader">
+        <div class="counter-wrap">
+            <span class="counter" id="counter">0</span>
+            <span class="counter-symbol">%</span>
+        </div>
+        <div class="loader-line"></div>
+    </div>
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+    <canvas id="canvas-bg"></canvas>
+
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#home" onclick="closeMenu()" data-en="Home" data-tr="Ana Sayfa">Ana Sayfa</a></li>
+            <li><a href="#about" onclick="closeMenu()" data-en="About" data-tr="Hakkımda">Hakkımda</a></li>
+            <li><a href="#services" onclick="closeMenu()" data-en="Services" data-tr="Hizmetler">Hizmetler</a></li>
+            <li><a href="#contact" data-en="Contact" data-tr="İletişim">İletişim</a></li>
+    </div>
+
+    <div class="social-sidebar">
+        <a href="https://github.com/emirhanuzgun" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+        <a href="https://instagram.com/emirhanuzgun" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/in/emirhan-üzgün" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:uzgunemirhan@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <nav>
+        <div class="glitch-wrapper"><div class="logo">Emirhan Üzgün</div></div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="#home" data-en="Home" data-tr="Ana Sayfa">Ana Sayfa</a></li>
+                <li><a href="#about" data-en="About" data-tr="Hakkımda">Hakkımda</a></li>
+                <li><a href="#services" data-en="Services" data-tr="Hizmetler">Hizmetler</a></li> 
+                <li><a href="#contact" data-en="Contact" data-tr="İletişim">İletişim</a></li>
+            </ul>
+            <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+            <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+            
+            <div class="hamburger" onclick="toggleMenu()">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home">
+        <h1 class="hero-title reveal">Emirhan Üzgün</h1>
+        <div class="typewriter-container reveal">
+            <span id="typewriter-text"></span><span class="cursor-blink"></span>
+        </div>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
+            <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
+            <div class="tech-item"><i class="fa-brands fa-figma"></i> FİGMA</div>
+            <div class="tech-item"><i class="fab fa-css3"></i> CSS3</div>
+            <div class="tech-item"><i class="fab fa-unity"></i> Unity</div>
+            <div class="tech-item"><i class="fas fa-cube"></i> <span data-en="Industrial Designing" data-tr="Endüstriyel Tasarım">Endüstriyel Tasarım </span> </div>
+            <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
+            <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
+            <div class="tech-item"><i class="fa-brands fa-figma"></i> FİGMA</div>
+            <div class="tech-item"><i class="fab fa-css3"></i> CSS3</div>
+            <div class="tech-item"><i class="fab fa-unity"></i> Unity</div>
+            <div class="tech-item"><i class="fas fa-cube"></i> <span data-en="Industrial Designing" data-tr="Endüstriyel Tasarım">Endüstriyel Tasarım</span> </div>
+            <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
+            <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
+            <div class="tech-item"><i class="fa-brands fa-figma"></i> FİGMA</div>
+            <div class="tech-item"><i class="fab fa-css3"></i> CSS3</div>
+            <div class="tech-item"><i class="fab fa-unity"></i> Unity</div>
+            <div class="tech-item"><i class="fas fa-cube"></i> <span data-en="Industrial Designing" data-tr="Endüstriyel Tasarım">Endüstriyel Tasarım</span> </div>
+        </div>
+    </div>
+
+    <section id="about">
+        <h2 class="reveal" style="font-size: 3rem; margin-bottom: 50px; color: var(--text-color);">
+            <span data-en="About Me" data-tr="Hakkımda">Hakkımda</span>
+        </h2>
+        <div class="card reveal" onmousemove="tiltCard(event, this)" onmouseleave="resetCard(this)" style="max-width: 800px; height: auto;">
+            <div class="card-content">
+                <h3 data-en="Who am I?" data-tr="Ben Kimim?">Ben Kimim?</h3>
+                <p class="about-text" data-en="I am a first-year Industrial Design student at Mudanya University. I combine my design vision with software development. My goal is to produce user-friendly and aesthetically pleasing work." data-tr="Ben Mudanya Üniversitesi Endüstriyel Tasarım 1. sınıf öğrencisiyim. Tasarım vizyonumu yazılım geliştirme ile birleştiriyorum. Kullanıcı dostu ve estetik işler üretmeyi hedefliyorum.">
+                    Ben Mudanya Üniversitesi <span class="about-highlight">Endüstriyel Tasarım</span> 1. sınıf öğrencisiyim. Tasarım vizyonumu yazılım geliştirme ile birleştiriyorum. Kullanıcı dostu ve estetik işler üretmeyi hedefliyorum.
+                </p>
+                <br>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <span 
+                     data-en="Industrial Designing" 
+                     data-tr="Endüstriyel Tasarım" 
+                     style="background: rgba(0, 242, 255, 0.1); padding: 5px 15px; border-radius: 20px; color: var(--accent-color); border: 1px solid var(--accent-color);">
+                     Endüstriyel Tasarım
+                 </span>
+
+                <span 
+                    data-en="Web Development" 
+                    data-tr="Web Geliştirme" 
+                    style="background: rgba(0, 242, 255, 0.1); padding: 5px 15px; border-radius: 20px; color: var(--accent-color); border: 1px solid var(--accent-color);">
+                    Web Geliştirme
+                 </span>
+
+                 <span 
+                    data-en="Game Dev" 
+                    data-tr="Oyun Geliştirme" 
+                    style="background: rgba(0, 242, 255, 0.1); padding: 5px 15px; border-radius: 20px; color: var(--accent-color); border: 1px solid var(--accent-color);">
+                    Oyun Geliştirme
+                </span>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="reveal" style="font-size: 3rem; margin-bottom: 50px; color: var(--text-color);">
+            <span data-en="What I Do?" data-tr="Neler Yapıyorum?">Neler Yapıyorum?</span>
+        </h2>
+        <div class="projects-grid">
+            <div class="card reveal" onmousemove="tiltCard(event, this)" onmouseleave="resetCard(this)" style="height: 250px;">
+                <div class="card-content" style="text-align: center;">
+                    <i class="fas fa-code" style="font-size: 3rem; color: #00f2ff; margin-bottom: 20px;"></i>
+                    <h3 data-en="Web Development" data-tr="Web Geliştirme">Web Geliştirme</h3>
+                    <p data-en="Modern, responsive & fast websites." data-tr="Modern, mobil uyumlu & hızlı web siteleri.">Modern, mobil uyumlu & hızlı web siteleri.</p>
+                </div>
+            </div>
+            <div class="card reveal" onmousemove="tiltCard(event, this)" onmouseleave="resetCard(this)" style="height: 250px;">
+                <div class="card-content" style="text-align: center;">
+                    <i class="fas fa-cubes" style="font-size: 3rem; color: #00f2ff; margin-bottom: 20px;"></i>
+                    <h3 data-en="Industrial Designing" data-tr="Endüstriyel Tasarım">Endüstriyel Tasarım</h3>
+                    <p data-en="3D modeling, rendering & product design." data-tr="3D modelleme, render & ürün tasarımı.">3D modelleme, render & ürün tasarımı.</p>
+                </div>
+            </div>
+            <div class="card reveal" onmousemove="tiltCard(event, this)" onmouseleave="resetCard(this)" style="height: 250px;">
+                <div class="card-content" style="text-align: center;">
+                    <i class="fas fa-gamepad" style="font-size: 3rem; color: #00f2ff; margin-bottom: 20px;"></i>
+                    <h3 data-en="Game Dev" data-tr="Oyun Geliştirme">Oyun Geliştirme</h3>
+                    <p data-en="Unity based on 2D/3D mechanics." data-tr="Unity tabanlı 2D/3D oyun mekanikleri.">Unity tabanlı 2D/3D oyun mekanikleri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="min-height: 50vh;">
+        <h2 class="reveal" style="margin-bottom: 20px;">
+        <span data-en="Let's build something together" data-tr="Birlikte bir şeyler yapalım">Birlikte bir şeyler yapalım</span>
+        </h2>
+        <a href="mailto:uzgunemirhan@gmail.com" class="mail-link reveal">uzgunemirhan@gmail.com</a>
+    </section>
+    <a href="#home" id="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // --- PRELOADER ---
+        window.addEventListener('load', () => {
+            const counterElement = document.getElementById('counter');
+            const preloader = document.getElementById('preloader');
+            
+            let count = 0;
+            const interval = setInterval(() => {
+                count += Math.floor(Math.random() * 5) + 1;
+                if (count > 100) count = 100;
+                if(counterElement) counterElement.innerText = count;
+
+                if (count === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        document.body.classList.remove('loading-blur');
+                        setTimeout(() => { preloader.style.display = 'none'; }, 500);
+                    }, 500);
+                }
+            }, 30);
+        });
+
+        // --- TEMA DEĞİŞTİRME (LIGHT/DARK) ---
+        let particleColor = 'rgba(255, 255, 255, 0.3)'; // Başlangıç rengi (Karanlık mod için beyaz)
+        
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const icon = document.querySelector('.theme-btn i');
+            
+            if(document.body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                particleColor = 'rgba(0, 0, 0, 0.4)'; // Aydınlık modda siyah noktalar
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                particleColor = 'rgba(255, 255, 255, 0.3)'; // Karanlık modda beyaz noktalar
+            }
+        }
+
+        // --- DİL VE TYPEWRITER ---
+        let currentLang = 'tr';
+        const phrasesTR = ["Yaratıcı Geliştirici.", "Endüstriyel Tasarımcı.", "Oyun Geliştiricisi."];
+        const phrasesEN = ["Creative Developer.", "Industrial Designer.", "Game Developer."];
+        let phrases = phrasesTR; 
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'tr' ? 'en' : 'tr';
+            document.querySelector('.lang-btn').innerText = currentLang === 'tr' ? 'EN' : 'TR';
+            document.querySelectorAll('[data-en]').forEach(el => { el.innerText = el.getAttribute(`data-${currentLang}`); });
+            phrases = currentLang === 'tr' ? phrasesTR : phrasesEN;
+        }
+
+        const textElement = document.getElementById('typewriter-text');
+        let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
+        function type() {
+            if (phraseIndex >= phrases.length) phraseIndex = 0;
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) { textElement.innerText = currentPhrase.substring(0, charIndex - 1); charIndex--; } 
+            else { textElement.innerText = currentPhrase.substring(0, charIndex + 1); charIndex++; }
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentPhrase.length) { typeSpeed = 2000; isDeleting = true; } 
+            else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500; }
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        function toggleMenu() { document.querySelector('.hamburger').classList.toggle('active'); document.querySelector('.mobile-menu').classList.toggle('active'); }
+        function closeMenu() { document.querySelector('.hamburger').classList.remove('active'); document.querySelector('.mobile-menu').classList.remove('active'); }
+
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+            const backBtn = document.getElementById("back-to-top");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { backBtn.classList.add("show"); } 
+            else { backBtn.classList.remove("show"); }
+        };
+
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        function animateCursor() {
+            cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
+            outlineX += (mouseX - outlineX) * 0.2; outlineY += (mouseY - outlineY) * 0.2;
+            cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        const clickables = document.querySelectorAll('a, button, .card, .logo, .social-icon, .hamburger');
+        clickables.forEach(el => {
+            el.addEventListener('mouseenter', () => { document.body.classList.add('hover-active'); });
+            el.addEventListener('mouseleave', () => { document.body.classList.remove('hover-active'); });
+        });
+
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); } }); }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function tiltCard(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+            const centerX = rect.width / 2; const centerY = rect.height / 2;
+            const rotateX = (centerY - y) / 15; const rotateY = (x - centerX) / 15;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        }
+        function resetCard(card) { card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`; }
+
+        const canvas = document.getElementById('canvas-bg'); const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        class Particle {
+            constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5; this.size = Math.random() * 2; }
+            update() { this.x += this.vx; this.y += this.vy; if(this.x < 0 || this.x > width) this.vx *= -1; if(this.y < 0 || this.y > height) this.vy *= -1; }
+            draw() { 
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
+                ctx.fillStyle = particleColor; // DİNAMİK RENK KULLANIYORUZ
+                ctx.fill(); 
+            }
+        }
+        for(let i=0; i<50; i++) particles.push(new Particle());
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for(let i=0; i<particles.length; i++) {
+                particles[i].update(); particles[i].draw();
+                for(let j=i; j<particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x; const dy = particles[i].y - particles[j].y; const dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 150) { ctx.beginPath(); ctx.strokeStyle = `rgba(0, 242, 255, ${1 - dist/150})`; ctx.lineWidth = 0.5; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke(); }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+        // ... (mevcut diğer fonksiyonların - toggleTheme, type vb.)
+
+        // MOBİL VE MASAÜSTÜ İÇİN GARANTİLİ YUMUŞAK KAYDIRMA KODU BURAYA GELECEK:
+        document.querySelector('a[href="#contact"]').addEventListener('click', function(e) {
+            e.preventDefault(); // Sayfanın aniden atlamasını veya mail açılmasını engeller
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+
+    </script> </body>
+</html>
+    </script>
+</body>
+<footer>
+    <p style="color: #888;">&copy; 2026 Emirhan Üzgün. Tüm hakları saklıdır.</p>
+</footer>
+</html>
