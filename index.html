@@ -446,6 +446,11 @@
     <a href="#home" id="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
     <script>
+        // Sayfa yenilendiğinde otomatik en üste atar
+    if (history.scrollRestoration) {
+        history.scrollRestoration = 'manual';
+     }
+        window.scrollTo(0, 0);
         // HTML'deki kartların ortak class ismini buraya yazmalısın.
         // Örnek: class="skill-card" ise burası '.skill-card' olmalı.
         const cards = document.querySelectorAll('.card reveal'); 
