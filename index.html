@@ -237,6 +237,30 @@
      padding: 40px 20px; /* İçeriden biraz boşluk ver */
     }
 
+        
+    /* --- MOBİL İÇİN ÖZEL AYARLAR (En alta ekle) --- */
+    @media screen and (max-width: 768px) {
+    
+    /* 1. KAFESİ DÜZELTİYORUZ: Yan yana sığmayan kartları tek sütuna düşür */
+    .projects-grid {
+        grid-template-columns: 1fr !important; /* Zorla tek sütun yap */
+        padding: 0 20px; /* Kenarlardan biraz boşluk bırak */
+    }
+
+    /* 2. KART BOYUTUNU DÜZELTİYORUZ: 600px mobilde çok uzun, kısaltıyoruz */
+    .card {
+        height: auto !important; /* İçeriğe göre uzasın */
+        min-height: 450px; /* Ama en az bu kadar olsun (eski haline yakın) */
+        margin-bottom: 30px; /* Kartlar birbirine yapışmasın */
+    }
+    
+    /* 3. YAZILARI DENGELİYORUZ: Mobilde devasa başlıklar göz yormasın */
+    .card h3 {
+        font-size: 1.8rem !important; /* Başlığı biraz küçült */
+    }
+}
+        
+
         /* İkonların rengini ve efektini biraz daha belirgin yapalım */
         #skills .card i {
         font-size: 3rem;
