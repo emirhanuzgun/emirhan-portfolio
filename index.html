@@ -301,6 +301,37 @@
     transform: scale(1.1);
     }
 
+
+    /* --- ZORUNLU NEON EFEKTİ (HTML DEĞİŞTİRMEDEN) --- */
+
+    /* 1. Kartın Kenarları ve Işığı */
+    .card {
+    border: 2px solid #00f2ff !important;  /* Kenarlık kesinlikle Mavi olsun */
+    background: rgba(0, 0, 0, 0.7) !important; /* Arka plan koyu olsun */
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.3) !important; /* Dışına ışık versin */
+    }
+
+    /* 2. Ortadaki İkonların Işığı */
+    .card i {
+    color: #00f2ff !important; /* İkon rengi kesinlikle Mavi olsun */
+    text-shadow: 0 0 15px #00f2ff, 0 0 30px rgba(0, 242, 255, 0.8) !important; /* Ampul gibi parlasın */
+    }
+
+    /* 3. Mouse ile Üzerine Gelince (Hover) */
+    .card:hover {
+    border-color: #ffffff !important; /* Kenarlık beyaza dönsün */
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.8) !important; /* Işık patlaması yapsın */
+    transform: translateY(-5px) scale(1.02); /* Hafif yukarı kalksın */
+    }
+
+    .card:hover i {
+    color: #ffffff !important; /* İkon beyaza dönsün */
+    text-shadow: 0 0 20px #00f2ff, 0 0 40px #00f2ff, 0 0 80px #ffffff !important; /* Çok güçlü parlasın */
+    }
+
+
+
+
     </style>
 </head>
 
