@@ -271,21 +271,22 @@
         text-shadow: 0 0 15px rgba(0, 242, 255, 0.5); /* Hafif neon parlaması */
         }
 
-        /* Projeleri yan yana dizen sihirli kod */
-        .projects-grid {
-         display: flex;             /* Esnek kutu modelini açar */
-         flex-wrap: wrap;           /* Sığmayanları alt satıra atar */
-         justify-content: center;   /* Kartları ortalar */
-          gap: 30px;                 /* Kartlar arasına 30px boşluk koyar */
-         margin-top: 20px;
-        }
+        /* 1. Kapsayıcı Ayarı: Kartları yan yana dizer */
+    .projects-grid {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: 30px;
+     margin-top: 20px;
+    }
 
-        /* Mobilde ve küçük ekranlarda kartların genişliği */
-        .card {
-          flex: 1 1 300px;           /* Kartlar en az 300px genişliğinde olsun */
-          max-width: 350px;          /* Ama 350px'ten de geniş olmasın */
-          margin: 0 auto;            /* Ortalamayı garantiye al */
-        }
+    /* 2. Kart Ayarı (DÜZELTİLDİ): Sadece Grid içindeki kartları etkiler */
+    /* Dikkat: .card yerine .projects-grid .card yazdık */
+    .projects-grid .card {
+     flex: 1 1 300px;      /* Esnek genişlik */
+     max-width: 350px;     /* Maksimum genişlik sınırı */
+      margin: 0 auto;       /* Ortala */
+    }
     </style>
 </head>
 
