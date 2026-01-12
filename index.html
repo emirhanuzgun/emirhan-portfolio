@@ -302,35 +302,37 @@
     }
 
 
-    /* --- ZORUNLU NEON EFEKTİ (HTML DEĞİŞTİRMEDEN) --- */
+    
+    /* --- NEON EFEKTİ V2 (DAHA NET VE KİBAR) --- */
 
-    /* 1. Kartın Kenarları ve Işığı */
+    /* 1. Kartın Kenarları (Burası aynı kalsın, beğenmiştin) */
     .card {
-    border: 2px solid #00f2ff !important;  /* Kenarlık kesinlikle Mavi olsun */
-    background: rgba(0, 0, 0, 0.7) !important; /* Arka plan koyu olsun */
-    box-shadow: 0 0 15px rgba(0, 242, 255, 0.3) !important; /* Dışına ışık versin */
+    border: 1px solid #00f2ff !important; /* Çerçeveyi biraz incelttim */
+    background: rgba(0, 0, 0, 0.7) !important;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.2) !important;
     }
 
-    /* 2. Ortadaki İkonların Işığı */
+    /* 2. İkonların Işığı (DÜZELTİLDİ: Artık kör etmiyor) */
     .card i {
-    color: #00f2ff !important; /* İkon rengi kesinlikle Mavi olsun */
-    text-shadow: 0 0 15px #00f2ff, 0 0 30px rgba(0, 242, 255, 0.8) !important; /* Ampul gibi parlasın */
+    color: #00f2ff !important;
+    /* Blur miktarlarını 15px/30px'ten -> 5px/10px'e düşürdük */
+    text-shadow: 0 0 5px #00f2ff, 0 0 10px rgba(0, 242, 255, 0.5) !important;
+    transition: all 0.3s ease;
     }
 
     /* 3. Mouse ile Üzerine Gelince (Hover) */
     .card:hover {
-    border-color: #ffffff !important; /* Kenarlık beyaza dönsün */
-    box-shadow: 0 0 40px rgba(0, 242, 255, 0.8) !important; /* Işık patlaması yapsın */
-    transform: translateY(-5px) scale(1.02); /* Hafif yukarı kalksın */
+    border-color: #ffffff !important;
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.6) !important;
+    transform: translateY(-5px) scale(1.02);
     }
 
     .card:hover i {
-    color: #ffffff !important; /* İkon beyaza dönsün */
-    text-shadow: 0 0 20px #00f2ff, 0 0 40px #00f2ff, 0 0 80px #ffffff !important; /* Çok güçlü parlasın */
-    }
-
-
-
+    color: #ffffff !important; /* İkonun kendisi beyazlaşsın */
+    /* Hover ışığını da azalttık, artık sadece tatlı bir parlama var */
+    text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff !important; 
+    transform: scale(1.1); 
+}
 
     </style>
 </head>
