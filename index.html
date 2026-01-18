@@ -714,19 +714,17 @@
         card.classList.add('active');
     });
 });
-        // --- YENİ PRELOADER ---
+       /* --- YENİ TEMİZ KOD --- */
     window.addEventListener("load", function () {
-        const loader = document.getElementById("preloader");
-        
-        // Buraya 6000 yazdım (Tam 6 Saniye Bekleyecek)
-        // Eğer bu da hızlı gelirse bilgisayarında bir sorun yok, tarayıcı eskiyi hatırlıyor demektir.
-        setTimeout(function() {
-            if (loader) {
-                loader.classList.add("hide-preloader");
-            }
-        }, 6000); 
+    const loader = document.getElementById("preloader");
+    
+    // 5000 = 5 Saniye bekle
+    setTimeout(function() {
+        if (loader) {
+            loader.classList.add("hide-preloader");
+        }
+    }, 5000); 
     });
-
         // --- TEMA DEĞİŞTİRME (LIGHT/DARK) ---
         let particleColor = 'rgba(255, 255, 255, 0.3)'; // Başlangıç rengi (Karanlık mod için beyaz)
         
