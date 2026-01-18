@@ -717,12 +717,14 @@
         // --- YENİ PRELOADER ---
     window.addEventListener("load", function () {
         const loader = document.getElementById("preloader");
-        if (loader) {
-           
-            setTimeout(function() {
+        
+        // Buraya 6000 yazdım (Tam 6 Saniye Bekleyecek)
+        // Eğer bu da hızlı gelirse bilgisayarında bir sorun yok, tarayıcı eskiyi hatırlıyor demektir.
+        setTimeout(function() {
+            if (loader) {
                 loader.classList.add("hide-preloader");
-            }, 4000); 
-        }
+            }
+        }, 6000); 
     });
 
         // --- TEMA DEĞİŞTİRME (LIGHT/DARK) ---
