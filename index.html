@@ -681,27 +681,16 @@
         card.classList.add('active');
     });
 });
-        // --- PRELOADER ---
-        window.addEventListener('load', () => {
-            const counterElement = document.getElementById('counter');
-            const preloader = document.getElementById('preloader');
-            
-            let count = 0;
-            const interval = setInterval(() => {
-                count += Math.floor(Math.random() * 5) + 1;
-                if (count > 100) count = 100;
-                if(counterElement) counterElement.innerText = count;
-
-                if (count === 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        preloader.style.opacity = '0';
-                        document.body.classList.remove('loading-blur');
-                        setTimeout(() => { preloader.style.display = 'none'; }, 2500);
-                    }, 500);
-                }
-            }, 30);
-        });
+        // --- YENİ PRELOADER ---
+    window.addEventListener("load", function () {
+        const loader = document.getElementById("preloader");
+        if (loader) {
+            // 2500ms = 2.5 saniye bekle ve kapat
+            setTimeout(function() {
+                loader.classList.add("hide-preloader");
+            }, 2500); 
+        }
+    });
 
         // --- TEMA DEĞİŞTİRME (LIGHT/DARK) ---
         let particleColor = 'rgba(255, 255, 255, 0.3)'; // Başlangıç rengi (Karanlık mod için beyaz)
