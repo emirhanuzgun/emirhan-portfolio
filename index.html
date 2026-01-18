@@ -334,41 +334,38 @@
     transform: scale(1.1); 
 }
 
-/* Sadece hero-title sınıfını hedefliyoruz */
 .hero-title {
-  /* Gradient Rengi: Mor -> Kırmızı -> Turuncu -> Mor */
+  /* Renk aralığını biraz daha zenginleştirdim (Mor -> Kırmızı -> Turuncu -> Kırmızı -> Mor) */
   background: linear-gradient(
     to right, 
     #8A2387, 
     #E94057, 
     #F27121, 
+    #E94057,
     #8A2387
   );
   
-  /* Arka plan boyutunu genişletiyoruz */
-  background-size: 300% auto;
+  /* Arka planı daha da büyütüyoruz ki renkler hemen bitmesin */
+  background-size: 400% auto;
   
-  /* Yazıyı maske olarak kullanıyoruz */
   -webkit-background-clip: text;
   background-clip: text;
-  
-  /* Yazının içini şeffaf yapıyoruz ki arkadaki renk görünsün */
   color: transparent;
   
-  /* "gradient-hareket" isimli animasyonu çağırıyoruz */
-  animation: gradient-hareket 5s linear infinite;
-  
-  /* EĞER 'reveal' sınıfı yazıya opacity veriyorsa, buraya ek ayar gerekmez.
-     Ancak yazı görünmüyorsa 'display: inline-block;' eklemeyi deneyebilirsin. */
+  /* ÖNEMLİ KISIM BURASI: 
+     1. Süreyi 8s yaptık (daha yavaş).
+     2. 'ease' ekledik (robotik değil, yumuşak hareket).
+     3. 'alternate' ekledik (Sona gelince başa zıplamaz, geri döner). 
+  */
+  animation: gradient-hareket 8s ease infinite alternate;
 }
 
-/* Animasyonun kendisi (Bunu CSS dosyasının en altına ekleyebilirsin) */
 @keyframes gradient-hareket {
   0% {
-    background-position: 0% center;
+    background-position: 0% 50%;
   }
   100% {
-    background-position: 100% center;
+    background-position: 100% 50%;
   }
 }
 
