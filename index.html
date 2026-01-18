@@ -714,16 +714,15 @@
         card.classList.add('active');
     });
 });
-       /* --- YENİ TEMİZ KOD --- */
+     /* --- YENİ TEMİZ PRELOADER KODU --- */
     window.addEventListener("load", function () {
     const loader = document.getElementById("preloader");
     
-    // 5000 = 5 Saniye bekle
     setTimeout(function() {
         if (loader) {
             loader.classList.add("hide-preloader");
         }
-    }, 5000); 
+    }, 10000); 
     });
         // --- TEMA DEĞİŞTİRME (LIGHT/DARK) ---
         let particleColor = 'rgba(255, 255, 255, 0.3)'; // Başlangıç rengi (Karanlık mod için beyaz)
