@@ -243,24 +243,19 @@
         #back-to-top:hover { background: var(--accent-color); color: #fff; box-shadow: 0 0 15px var(--accent-color); }
         .glitch-wrapper { position: relative; }
         
-        /* --- LOGO VE GLITCH --- */
-        .logo { font-size: 1.2rem; font-weight: 900; letter-spacing: 1px; color: #fff; position: relative; cursor: pointer; white-space: nowrap; transition: color 0.5s; }
-        .logo::before, .logo::after { content: 'Emirhan Üzgün'; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #050505; transition: background 0.5s; }
-        .logo::before { left: 2px; text-shadow: -1px 0 red; clip: rect(24px, 550px, 90px, 0); animation: glitch-anim-2 3s infinite linear alternate-reverse; }
-        .logo::after { left: -2px; text-shadow: -1px 0 blue; clip: rect(85px, 550px, 140px, 0); animation: glitch-anim 2.5s infinite linear alternate-reverse; }
-        @keyframes glitch-anim { 0% { clip: rect(10px, 9999px, 31px, 0); } 100% { clip: rect(5px, 9999px, 95px, 0); } }
-        @keyframes glitch-anim-2 { 0% { clip: rect(65px, 9999px, 100px, 0); } 100% { clip: rect(10px, 9999px, 45px, 0); } }
-        
-        footer { padding: 50px; text-align: center; border-top: 1px solid var(--border-color); background: #000; }
-        body.light-mode footer { background: #e0e0e0; }
-        .mail-link { font-size: 2rem; color: var(--accent-color); font-weight: bold; cursor: pointer; }
-        
-        @media (max-width: 768px) {
-            .hero-title { font-size: 3.5rem; } nav { padding: 20px 30px; }
-            .nav-right ul { display: none; } .hamburger { display: block; }
-            .social-sidebar { display: none; } .cursor-dot, .cursor-outline { display: none; }
-            body { cursor: auto; }
-        }
+        /* --- YENİ LOGO STİLİ (RESİM İÇİN) --- */
+    .logo {
+    display: flex; /* Resmi dikeyde ortalamak için */
+    align-items: center;
+    text-decoration: none; /* Altındaki çizgiyi kaldırır */
+    padding: 5px 0; /* Biraz boşluk bırakır */
+    transition: transform 0.3s ease; /* Üzerine gelince büyüme efekti için */
+    }
+
+    /* Üzerine gelince hafif büyüsün */
+    .logo:hover {
+    transform: scale(1.1);
+    }
         /* Yetenekler bölümündeki kartları özel olarak düzeltir */
         #skills .card {
      height: auto; /* Sabit yüksekliği iptal et, içeriğe göre uzasın */
