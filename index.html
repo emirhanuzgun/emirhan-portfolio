@@ -70,7 +70,7 @@
         #progress-bar { height: 100%; background: var(--accent-color); width: 0%; box-shadow: 0 0 10px var(--accent-color); }
 
         /* --- YENİ LOADING EKRANI (Logo Altında) --- */
-    #preloader {
+    #yeni-loader {
         position: fixed;
         top: 0;
         left: 0;
@@ -401,36 +401,49 @@
   }
 }
 
-/* --- LOADING EKRANI STİLLERİ --- */
-#preloader {
+/* --- YENİ İSİMLENDİRİLMİŞ LOADING EKRANI --- */
+
+/* Dikkat: ID artık #yeni-loader oldu */
+#yeni-loader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: #0f0f0f;
-    z-index: 9999;
+    height: 100vh;
+    background-color: #0f0f0f !important; /* Arka plan rengin */
+    z-index: 99999;
     display: flex;
+    flex-direction: column; /* Alt alta dizmek için */
     justify-content: center;
     align-items: center;
+    gap: 25px; /* Halka ile logo arasındaki boşluk */
     transition: opacity 0.5s ease, visibility 0.5s;
 }
 
+/* Dönen Neon Halka */
 .spinner {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border: 4px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
-    border-top-color: #E94057;
-    border-left-color: #8A2387;
+    border-top-color: #E94057; /* Kırmızı */
+    border-left-color: #8A2387; /* Mor */
     animation: spin 1s ease-in-out infinite;
 }
 
+/* Alttaki Sabit Logo */
+.preloader-logo {
+    width: 60px; /* Logo boyutunu buradan ayarla */
+    height: auto;
+}
+
+/* Dönme Hareketi */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+/* Gizleme Sınıfı */
 .hide-preloader {
     opacity: 0;
     visibility: hidden;
@@ -441,7 +454,7 @@
 
 <body>
 
-    <div id="preloader">
+    <div id="yeni-loader">
         <div class="spinner"></div>
         <img src="images/preview.png" alt="Logo" class="preloader-logo">
     </div>
@@ -716,7 +729,7 @@
 });
      /* --- YENİ TEMİZ PRELOADER KODU --- */
     window.addEventListener("load", function () {
-    const loader = document.getElementById("preloader");
+    const loader = document.getElementById("yeni-loader");
     
     setTimeout(function() {
         if (loader) {
@@ -858,7 +871,7 @@
         });
        
         window.addEventListener("load", function () {
-        const loader = document.getElementById("preloader");
+        const loader = document.getElementById("yeni-loader");
         if (loader) {
             loader.classList.add("hide-preloader");
         }
