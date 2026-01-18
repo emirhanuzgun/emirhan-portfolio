@@ -69,19 +69,51 @@
         #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 99999; background: transparent; }
         #progress-bar { height: 100%; background: var(--accent-color); width: 0%; box-shadow: 0 0 10px var(--accent-color); }
 
-        /* --- PRELOADER --- */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: var(--bg-color);
-            z-index: 99999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-        }
-        .counter-wrap { position: relative; overflow: hidden; }
-        .counter { font-size: 8rem; font-weight: 900; color: var(--text-color); font-family: 'Montserrat', sans-serif; line-height: 1; }
-        .counter-symbol { font-size: 2rem; color: var(--accent-color); position: absolute; top: 15px; right: -30px; }
-        .loader-line { width: 200px; height: 2px; background: #333; margin-top: 20px; position: relative; overflow: hidden; border-radius: 2px; }
-        .loader-line::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--accent-color); animation: loadLine 2s ease-in-out forwards; }
-        @keyframes loadLine { 0% { width: 0%; } 100% { width: 100%; } }
+        /* --- YENİ LOADING EKRANI (Logo Altında) --- */
+    #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #0f0f0f; /* Arka plan rengin */
+        z-index: 99999;
+        display: flex;
+        flex-direction: column; /* Alt alta dizmek için */
+        justify-content: center;
+        align-items: center;
+        gap: 25px; /* Halka ile logo arasındaki boşluk */
+        transition: opacity 0.5s ease, visibility 0.5s;
+    }
+
+    /* Dönen Halka */
+    .spinner {
+        width: 70px;
+        height: 70px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        border-top-color: #E94057; /* Kırmızı */
+        border-left-color: #8A2387; /* Mor */
+        animation: spin 1s ease-in-out infinite;
+    }
+
+    /* Alttaki Sabit Logo */
+    .preloader-logo {
+        width: 60px; /* Logo boyutunu buradan ayarla */
+        height: auto;
+    }
+
+    /* Dönme Hareketi */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Gizleme Sınıfı */
+    .hide-preloader {
+        opacity: 0;
+        visibility: hidden;
+    }
 
         /* --- CURSOR --- */
         .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; }
@@ -411,6 +443,7 @@
 
     <div id="preloader">
         <div class="spinner"></div>
+        <img src="images/preview.png" alt="Logo" class="preloader-logo">
     </div>
 
     <div class="cursor-dot" id="cursor-dot"></div>
