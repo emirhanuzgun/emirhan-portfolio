@@ -134,13 +134,13 @@
         border-radius: 50%;
         z-index: 10000;
         pointer-events: none;
-        mix-blend-mode: difference; /* SİHİR BURADA: Rengi ters çevirir */
+       
     }
 
     .cursor-dot {
         width: 7px; /* Noktayı biraz büyüttüm net görünsün */
         height: 7px;
-        background-color: #00f2ff; /* Senin Neon Mavisi */
+        background-color: var(--accent-color);
     }
 
     .cursor-outline {
@@ -150,18 +150,11 @@
         transition: all 0.2s;
     }
 
-    /* Linklerin üzerine gelince içi dolsun */
     body.hover-active .cursor-outline {
         width: 20x;
         height: 20px;
-        background-color: #00f2ff; /* İçi Neon Mavi dolsun */
-        opacity: 1; 
-        border-color: transparent;
-    }
-
-    /* Hover olunca ortadaki nokta kaybolsun */
-        body.hover-active .cursor-dot {
-        opacity: 0;
+        background-color: rgba(0, 242, 255, 0.2); 
+        border-color: var(--accent-color);
     }
 
         /* --- ARKA PLAN --- */
