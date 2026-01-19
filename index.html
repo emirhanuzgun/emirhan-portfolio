@@ -125,11 +125,44 @@
         visibility: hidden;
     }
 
-        /* --- CURSOR --- */
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; }
-        .cursor-dot { width: 6px; height: 6px; background-color: var(--accent-color); }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(0, 242, 255, 0.5); transition: all 0.2s; }
-        body.hover-active .cursor-outline { width: 20px; height: 20px; background-color: rgba(0, 242, 255, 0.2); border-color: var(--accent-color); }
+        /* --- CURSOR (NEON MAVİ + ZIT RENK EFEKTİ) --- */
+    .cursor-dot, .cursor-outline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 10000;
+        pointer-events: none;
+        mix-blend-mode: difference; /* SİHİR BURADA: Rengi ters çevirir */
+    }
+
+    .cursor-dot {
+        width: 8px; /* Noktayı biraz büyüttüm net görünsün */
+        height: 8px;
+        background-color: #00f2ff; /* Senin Neon Mavisi */
+    }
+
+    .cursor-outline {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #00f2ff; /* Çerçeve de Neon Mavi */
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
+    }
+
+    /* Linklerin üzerine gelince içi dolsun */
+    body.hover-active .cursor-outline {
+        width: 60px;
+        height: 60px;
+        background-color: #00f2ff; /* İçi Neon Mavi dolsun */
+        opacity: 1; 
+        border-color: transparent;
+    }
+
+    /* Hover olunca ortadaki nokta kaybolsun */
+        body.hover-active .cursor-dot {
+        opacity: 0;
+    }
 
         /* --- ARKA PLAN --- */
         #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: var(--canvas-gradient); transition: background 0.5s ease; }
