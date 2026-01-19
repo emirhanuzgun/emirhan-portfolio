@@ -24,56 +24,6 @@
     <meta property="og:description" content="Tasarım vizyonunu kodun gücüyle birleştiriyorum. Projelerimi inceleyin.">
     <meta property="og:image" content="https://emirhanuzgun.github.io/emirhan-portfolio/images/preview.png"> <meta property="og:url" content="https://emirhanuzgun.dev">
     <style>
-        /* --- MOBİL UYUMLULUK (RESPONSIVE) AYARLARI --- */
-
-    /* Ekran genişliği 768px ve altındaysa (Tablet ve Telefon) */
-    @media screen and (max-width: 768px) {
-
-    /* 1. Yan yana duran her şeyi alt alta indir */
-    /* Flexbox kullanan container'ları bulup dikey yapıyoruz */
-    .container, .row, .flex-container, section {
-        flex-direction: column !important;
-        width: 100% !important;
-        padding-left: 15px !important;
-        padding-right: 15px !important;
-        box-sizing: border-box; /* Taşmaları önler */
-    }
-
-    /* 2. O devasa başlıkları küçült */
-    h1 {
-        font-size: 2.5rem !important; /* Başlıklar telefonda devasa kalmasın */
-        text-align: center;
-    }
-    
-    h2 {
-        font-size: 2rem !important;
-    }
-
-    /* 3. Resimler ekrandan taşmasın */
-    img {
-        max-width: 100% !important; /* Resim ekranı asla geçemesin */
-        height: auto !important;
-    }
-
-    /* 4. Navbar/Header Düzeni */
-    header, nav {
-        padding: 10px !important;
-        justify-content: center;
-    }
-
-    /* 5. Senin İletişim Maili (Mobilde çok büyük kalabilir) */
-    #contact a {
-        font-size: 1.1rem !important; /* Telefonta 2.5rem çok büyük olur */
-        word-break: break-all; /* Uzun mail adresi ekranı delip geçmesin */
-    }
-    
-    /* 6. Preloader Logosu */
-    .spinner {
-        width: 50px;
-        height: 50px;
-    }
-    }   
-          
         /* --- TEMEL AYARLAR --- */
         html {
          scroll-behavior: smooth;
@@ -328,27 +278,61 @@
     }
 
         
-    /* --- MOBİL İÇİN ÖZEL AYARLAR (En alta ekle) --- */
-    @media screen and (max-width: 768px) {
+        /* --- MOBİL İÇİN FİNAL DÜZELTMELER (RESPONSIVE) --- */
+         /* Bu kod </style> etiketinin hemen üstünde olmalı */
+         @media screen and (max-width: 768px) {
     
-    /* 1. KAFESİ DÜZELTİYORUZ: Yan yana sığmayan kartları tek sütuna düşür */
-    .projects-grid {
-        grid-template-columns: 1fr !important; /* Zorla tek sütun yap */
-        padding: 0 20px; /* Kenarlardan biraz boşluk bırak */
-    }
+        /* 1. Tüm Kutuları Alt Alta Diz */
+        section, .container, .row, .projects-grid {
+            display: flex;
+            flex-direction: column !important;
+            width: 100% !important;
+            padding: 0 15px !important;
+            box-sizing: border-box;
+        }
 
-    /* 2. KART BOYUTUNU DÜZELTİYORUZ: 600px mobilde çok uzun, kısaltıyoruz */
-    .card {
-        height: auto !important; /* İçeriğe göre uzasın */
-        min-height: 450px; /* Ama en az bu kadar olsun (eski haline yakın) */
-        margin-bottom: 30px; /* Kartlar birbirine yapışmasın */
+        /* 2. Proje Kartlarını Tek Sıraya Zorla */
+        .projects-grid {
+            grid-template-columns: 1fr !important;
+            gap: 30px !important;
+        }
+
+        /* 3. Kartların Boyutunu Ayarla */
+        .card {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important; /* İçeriğe göre uzasın */
+            margin: 0 auto 20px auto; /* Ortala ve alt boşluk bırak */
+        }
+
+        /* 4. Başlıkları Küçült (Telefonda çok yer kaplamasın) */
+        h1 { font-size: 2.5rem !important; text-align: center; }
+        h2 { font-size: 2rem !important; text-align: center; }
+
+        /* 5. Yazıları Okunur Yap */
+        p, span, a, li {
+            font-size: 1rem !important;
+            word-wrap: break-word;
+        }
+
+        /* 6. Resimlerin Taşmasını Engelle */
+        img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        /* 7. İletişim Mailini Küçült (En kritik yer burasıydı) */
+        #contact a {
+            font-size: 1.2rem !important; 
+            word-break: break-all; /* Ekrana sığmazsa alt satıra geçsin */
+        }
+        
+        /* 8. Navbar ve Logo Ayarı */
+        nav {
+            padding: 10px 20px !important;
+            justify-content: space-between !important;
+        }
     }
-    
-    /* 3. YAZILARI DENGELİYORUZ: Mobilde devasa başlıklar göz yormasın */
-    .card h3 {
-        font-size: 1.8rem !important; /* Başlığı biraz küçült */
-    }
-}
         
 
         /* İkonların rengini ve efektini biraz daha belirgin yapalım */
