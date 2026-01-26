@@ -24,6 +24,7 @@
     <meta property="og:description" content="Tasarım vizyonunu kodun gücüyle birleştiriyorum. Projelerimi inceleyin.">
     <meta property="og:image" content="https://emirhanuzgun.github.io/emirhan-portfolio/images/preview.png"> <meta property="og:url" content="https://emirhanuzgun.dev">
     <style>
+        
         /* --- TEMEL AYARLAR --- */
         html {
          scroll-behavior: smooth;
@@ -801,7 +802,15 @@
     <a href="#home" id="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
     <script>
-        // Sayfa yenilendiğinde otomatik en üste atar
+       const menuLinks = document.querySelectorAll('.nav-menu a'); 
+    const navMenu = document.querySelector('.nav-menu'); 
+
+    menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active'); 
+        });
+    });
+       // Sayfa yenilendiğinde otomatik en üste atar
     if (history.scrollRestoration) {
         history.scrollRestoration = 'manual';
         }
@@ -966,8 +975,14 @@
      
   </script>
 
-  <footer>
-      <p style="color: #888;">&copy; 2026 Emirhan Üzgün | Tüm hakları saklıdır.</p>
-  </footer>
+  <footer style="background-color: #0d0d0d; padding: 30px 0; text-align: center; color: #888; border-top: 1px solid #222;">
+    <div style="margin-bottom: 15px; font-size: 12px;">
+        <a href="gizlilik.html" style="color: #666; text-decoration: none; margin: 0 10px; transition: 0.3s;">Gizlilik Politikası</a>
+        <span>|</span>
+        <a href="kullanim-kosullari.html" style="color: #666; text-decoration: none; margin: 0 10px; transition: 0.3s;">Kullanım Koşulları</a>
+    </div>
+    <p style="font-size: 13px; margin: 0;">&copy; 2026 Emirhan Üzgün | Tüm hakları saklıdır.</p>
+</footer>
+
 </body>
 </html>
