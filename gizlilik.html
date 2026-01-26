@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gizlilik Politikası | Emirhan Üzgün</title>
+    <title>Privacy Policy | Emirhan Üzgün</title>
     <style>
         body {
             background-color: #0d0d0d;
@@ -20,14 +20,34 @@
         .container {
             max-width: 800px;
             padding: 40px;
-            background-color: #121212; /* Hafif ton farkı */
+            background-color: #121212;
             border-radius: 12px;
             border: 1px solid #333;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative; /* Buton konumlandırma için */
         }
+        /* Dil Değiştirme Butonu */
+        .lang-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid #00dfc4;
+            color: #00dfc4;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .lang-btn:hover {
+            background: #00dfc4;
+            color: #000;
+        }
+
         h1 {
             color: #fff;
-            border-bottom: 2px solid #00dfc4; /* Neon vurgu rengin */
+            border-bottom: 2px solid #00dfc4;
             padding-bottom: 10px;
             margin-bottom: 20px;
             font-size: 24px;
@@ -63,28 +83,77 @@
 <body>
 
     <div class="container">
-        <h1>Gizlilik Politikası</h1>
-        <p><strong>Son Güncelleme:</strong> 26 Ocak 2026</p>
-        
-        <p>Emirhan Üzgün ("emirhanuzgun.dev") olarak veri gizliliğinize önem veriyorum. Bu metin, web sitesini ziyaret ettiğinizde veya benimle iletişime geçtiğinizde bilgilerinizin nasıl işlendiğini açıklar.</p>
+        <button class="lang-btn" onclick="toggleLanguage()">EN</button>
 
-        <h2>1. Toplanan Bilgiler</h2>
-        <p>Web sitem üzerindeki iletişim formunu kullandığınızda veya bana e-posta gönderdiğinizde; size yanıt verebilmek adına Adınız, E-posta adresiniz ve mesaj içeriğiniz gibi temel iletişim bilgilerini talep etmekteyim.</p>
+        <div id="content-tr">
+            <h1>Gizlilik Politikası</h1>
+            <p><strong>Son Güncelleme:</strong> 26 Ocak 2026</p>
+            
+            <p>Emirhan Üzgün ("emirhanuzgun.dev") olarak veri gizliliğinize önem veriyorum. Bu metin, web sitesini ziyaret ettiğinizde veya benimle iletişime geçtiğinizde bilgilerinizin nasıl işlendiğini açıklar.</p>
+    
+            <h2>1. Toplanan Bilgiler</h2>
+            <p>Web sitem üzerindeki iletişim formunu kullandığınızda veya bana e-posta gönderdiğinizde; size yanıt verebilmek adına Adınız, E-posta adresiniz ve mesaj içeriğiniz gibi temel iletişim bilgilerini talep etmekteyim.</p>
+    
+            <h2>2. Bilgilerin Kullanımı</h2>
+            <p>Toplanan bu bilgiler yalnızca sizinle iletişim kurmak, sorularınızı yanıtlamak veya proje taleplerinizi değerlendirmek amacıyla kullanılır. Pazarlama amacıyla kullanılmaz.</p>
+    
+            <h2>3. Veri Paylaşımı ve Güvenlik</h2>
+            <p>Kişisel verileriniz, yasal zorunluluklar haricinde asla üçüncü şahıslarla paylaşılmaz, satılmaz veya kiralanmaz.</p>
+    
+            <h2>4. Çerezler (Cookies)</h2>
+            <p>Sitemde kullanıcı deneyimini iyileştirmek adına standart web teknolojileri ve çerezler kullanılabilir. Tarayıcınızın ayarlarından çerezleri dilediğiniz zaman engelleyebilirsiniz.</p>
+    
+            <h2>İletişim</h2>
+            <p>Gizlilik politikası hakkında sorularınız varsa <strong>uzgunemirhan@gmail.com</strong> adresi üzerinden iletişime geçebilirsiniz.</p>
+    
+            <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
+        </div>
 
-        <h2>2. Bilgilerin Kullanımı</h2>
-        <p>Toplanan bu bilgiler yalnızca sizinle iletişim kurmak, sorularınızı yanıtlamak veya proje taleplerinizi değerlendirmek amacıyla kullanılır. Pazarlama amacıyla kullanılmaz.</p>
+        <div id="content-en" style="display: none;">
+            <h1>Privacy Policy</h1>
+            <p><strong>Last Updated:</strong> January 26, 2026</p>
+            
+            <p>As Emirhan Üzgün ("emirhanuzgun.dev"), I value your data privacy. This text explains how your information is processed when you visit the website or contact me.</p>
+    
+            <h2>1. Collected Information</h2>
+            <p>When you use the contact form on my website or send me an email, I request basic contact information such as your Name, Email Address, and message content in order to respond to you.</p>
+    
+            <h2>2. Use of Information</h2>
+            <p>This collected information is used solely to communicate with you, answer your questions, or evaluate your project requests. It is not used for marketing purposes.</p>
+    
+            <h2>3. Data Sharing and Security</h2>
+            <p>Your personal data is never shared, sold, or rented to third parties unless required by law.</p>
+    
+            <h2>4. Cookies</h2>
+            <p>Standard web technologies and cookies may be used on my site to improve user experience. You can block cookies at any time through your browser settings.</p>
+    
+            <h2>Contact</h2>
+            <p>If you have questions about the privacy policy, you can contact me at <strong>uzgunemirhan@gmail.com</strong>.</p>
+    
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
 
-        <h2>3. Veri Paylaşımı ve Güvenlik</h2>
-        <p>Kişisel verileriniz, yasal zorunluluklar haricinde asla üçüncü şahıslarla paylaşılmaz, satılmaz veya kiralanmaz.</p>
-
-        <h2>4. Çerezler (Cookies)</h2>
-        <p>Sitemde kullanıcı deneyimini iyileştirmek adına standart web teknolojileri ve çerezler kullanılabilir. Tarayıcınızın ayarlarından çerezleri dilediğiniz zaman engelleyebilirsiniz.</p>
-
-        <h2>İletişim</h2>
-        <p>Gizlilik politikası hakkında sorularınız varsa <strong>uzgunemirhan@gmail.com</strong> adresi üzerinden iletişime geçebilirsiniz.</p>
-
-        <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
     </div>
+
+    <script>
+        function toggleLanguage() {
+            var trContent = document.getElementById("content-tr");
+            var enContent = document.getElementById("content-en");
+            var btn = document.querySelector(".lang-btn");
+
+            if (trContent.style.display === "none") {
+                // Türkçe'ye geç
+                trContent.style.display = "block";
+                enContent.style.display = "none";
+                btn.innerText = "EN"; // Butonda İngilizce seçeneğini göster
+            } else {
+                // İngilizce'ye geç
+                trContent.style.display = "none";
+                enContent.style.display = "block";
+                btn.innerText = "TR"; // Butonda Türkçe seçeneğini göster
+            }
+        }
+    </script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kullanım Koşulları | Emirhan Üzgün</title>
+    <title>Terms of Use | Emirhan Üzgün</title>
     <style>
         body {
             background-color: #0d0d0d;
@@ -24,7 +24,26 @@
             border-radius: 12px;
             border: 1px solid #333;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
         }
+        .lang-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid #00dfc4;
+            color: #00dfc4;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .lang-btn:hover {
+            background: #00dfc4;
+            color: #000;
+        }
+
         h1 {
             color: #fff;
             border-bottom: 2px solid #00dfc4;
@@ -63,23 +82,65 @@
 <body>
 
     <div class="container">
-        <h1>Kullanım Koşulları</h1>
-        <p>Lütfen <strong>emirhanuzgun.dev</strong> web sitesini kullanmadan önce aşağıdaki koşulları okuyunuz.</p>
+        <button class="lang-btn" onclick="toggleLanguage()">EN</button>
 
-        <h2>1. Telif Hakkı</h2>
-        <p>Bu web sitesinde yer alan tüm tasarımlar, kod yapıları, proje görselleri ve içerikler (aksi belirtilmedikçe) Emirhan Üzgün'e aittir. Kişisel portfolyo amacı taşımaktadır. İzinsiz kopyalanamaz veya ticari amaçla çoğaltılamaz.</p>
+        <div id="content-tr">
+            <h1>Kullanım Koşulları</h1>
+            <p>Lütfen <strong>emirhanuzgun.dev</strong> web sitesini kullanmadan önce aşağıdaki koşulları okuyunuz.</p>
+    
+            <h2>1. Telif Hakkı</h2>
+            <p>Bu web sitesinde yer alan tüm tasarımlar, kod yapıları, proje görselleri ve içerikler (aksi belirtilmedikçe) Emirhan Üzgün'e aittir. Kişisel portfolyo amacı taşımaktadır. İzinsiz kopyalanamaz veya ticari amaçla çoğaltılamaz.</p>
+    
+            <h2>2. İçerik Kullanımı</h2>
+            <p>Sitede sergilenen açık kaynak (open-source) projeler, ilgili GitHub depolarında belirtilen lisans koşullarına (MIT, Apache vb.) tabidir. Diğer tüm içerikler sadece inceleme ve referans amaçlıdır.</p>
+    
+            <h2>3. Sorumluluk Reddi</h2>
+            <p>Web sitesinde yer alan bilgiler genel bilgilendirme amaçlıdır. Bu site üzerinden verilen dış bağlantıların (örneğin LinkedIn, Instagram vb.) içeriğinden veya güvenliğinden site sahibi sorumlu tutulamaz.</p>
+    
+            <h2>4. Değişiklikler</h2>
+            <p>Site sahibi, bu koşulları dilediği zaman önceden haber vermeksizin değiştirme hakkını saklı tutar.</p>
+    
+            <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
+        </div>
 
-        <h2>2. İçerik Kullanımı</h2>
-        <p>Sitede sergilenen açık kaynak (open-source) projeler, ilgili GitHub depolarında belirtilen lisans koşullarına (MIT, Apache vb.) tabidir. Diğer tüm içerikler sadece inceleme ve referans amaçlıdır.</p>
+        <div id="content-en" style="display: none;">
+            <h1>Terms of Use</h1>
+            <p>Please read the following terms before using the <strong>emirhanuzgun.dev</strong> website.</p>
+    
+            <h2>1. Copyright</h2>
+            <p>All designs, code structures, project images, and content on this website belong to Emirhan Üzgün (unless otherwise stated). It is intended for a personal portfolio. It cannot be copied or reproduced for commercial purposes without permission.</p>
+    
+            <h2>2. Content Usage</h2>
+            <p>Open-source projects showcased on the site are subject to the license conditions (MIT, Apache, etc.) specified in the relevant GitHub repositories. All other content is for review and reference purposes only.</p>
+    
+            <h2>3. Disclaimer</h2>
+            <p>The information on this website is for general informational purposes. The site owner cannot be held responsible for the content or security of external links (e.g., LinkedIn, Instagram) provided through this site.</p>
+    
+            <h2>4. Changes</h2>
+            <p>The site owner reserves the right to change these terms at any time without prior notice.</p>
+    
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
 
-        <h2>3. Sorumluluk Reddi</h2>
-        <p>Web sitesinde yer alan bilgiler genel bilgilendirme amaçlıdır. Bu site üzerinden verilen dış bağlantıların (örneğin LinkedIn, Instagram vb.) içeriğinden veya güvenliğinden site sahibi sorumlu tutulamaz.</p>
-
-        <h2>4. Değişiklikler</h2>
-        <p>Site sahibi, bu koşulları dilediği zaman önceden haber vermeksizin değiştirme hakkını saklı tutar.</p>
-
-        <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
     </div>
+
+    <script>
+        function toggleLanguage() {
+            var trContent = document.getElementById("content-tr");
+            var enContent = document.getElementById("content-en");
+            var btn = document.querySelector(".lang-btn");
+
+            if (trContent.style.display === "none") {
+                trContent.style.display = "block";
+                enContent.style.display = "none";
+                btn.innerText = "EN";
+            } else {
+                trContent.style.display = "none";
+                enContent.style.display = "block";
+                btn.innerText = "TR";
+            }
+        }
+    </script>
 
 </body>
 </html>
