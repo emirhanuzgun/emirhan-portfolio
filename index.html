@@ -78,7 +78,13 @@
 
         /* --- SCROLL PROGRESS BAR --- */
         #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 99999; background: transparent; }
-        #progress-bar { height: 100%; background: var(--accent-color); width: 0%; box-shadow: 0 0 10px var(--accent-color); }
+        #progress-bar { 
+            height: 100%; 
+            background: linear-gradient(90deg, #b000ff, #00dfc4); /* Mor'dan Turkuaz'a geçiş */
+            width: 0%; 
+            box-shadow: 0 0 10px #00dfc4, 0 0 20px #b000ff; 
+            border-radius: 0 10px 10px 0;
+        }
 
         /* --- YENİ LOADING EKRANI (Logo Altında) --- */
     #yeni-loader {
@@ -548,7 +554,10 @@
 </head>
 
 <body>
-
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    
     <div id="yeni-loader">
         <div class="spinner"></div>
         <img src="images/preview.png" alt="Logo" class="preloader-logo">
@@ -813,14 +822,36 @@
     <a href="#home" id="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
     <script>
-       const menuLinks = document.querySelectorAll('.nav-menu a'); 
-    const navMenu = document.querySelector('.nav-menu'); 
 
-    menuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active'); 
+        // Scroll Progress Bar Hesaplaması
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+    
+        // Genişliği #progress-bar id'li elemana veriyoruz
+    document.getElementById("progress-bar").style.width = scrolled + "%";
+    });
+
+       /* --- GÜNCELLENMİŞ MENÜ KAPATMA KODU --- */
+
+    // 1. Menüdeki standart linkleri seçiyoruz (.nav-menu içindeki a etiketleri)
+    // 2. Ayrıca gidilecek adresi 'iletisim' veya 'contact' olan tüm butonları da ekliyoruz.
+        const menuLinks = document.querySelectorAll('.nav-menu a, a[href="#contact"], a[href="#iletisim"]');
+        const navMenu = document.querySelector('.nav-menu'); 
+    // Eğer hamburger ikonun da animasyonluysa (çarpı oluyorsa) onun class'ını da buraya eklemelisin:
+    // const hamburgerBtn = document.querySelector('.hamburger'); 
+
+        menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+     // Menüyü kapat
+        navMenu.classList.remove('active');
+        
+        // Eğer ikon animasyonu varsa onu da kapatmak için:
+        // if(hamburgerBtn) hamburgerBtn.classList.remove('active');
         });
     });
+
        // Sayfa yenilendiğinde otomatik en üste atar
     if (history.scrollRestoration) {
         history.scrollRestoration = 'manual';
