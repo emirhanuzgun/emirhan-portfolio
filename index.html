@@ -550,6 +550,26 @@
      cursor: pointer; /* El işaretinin çıkmasını garantiye alır */
     }
     
+        /* Mobil Akıcılık: Donanım Hızlandırma */
+    .card, .reveal, .hero-title, .marquee-content {
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform: translateZ(0); 
+    will-change: transform, opacity;
+    }
+
+    @media screen and (max-width: 768px) {
+    .hero-title {
+        font-size: 3.2rem !important; /* Mobilde taşmayı önler */
+    }
+        /* Mobilde imleci gizle (çünkü parmakla kullanılıyor) */
+    .cursor-dot, .cursor-outline {
+        display: none !important;
+    }
+    * { cursor: auto !important; }
+    }   
+
+
     </style>
 </head>
 
@@ -833,22 +853,12 @@
     document.getElementById("progress-bar").style.width = scrolled + "%";
     });
 
-       /* --- GÜNCELLENMİŞ MENÜ KAPATMA KODU --- */
+       // Mobil menü içindeki tüm linkleri (İletişim dahil) bul ve tıklandığında kapat
+    const allMobileLinks = document.querySelectorAll('.mobile-menu a');
 
-    // 1. Menüdeki standart linkleri seçiyoruz (.nav-menu içindeki a etiketleri)
-    // 2. Ayrıca gidilecek adresi 'iletisim' veya 'contact' olan tüm butonları da ekliyoruz.
-        const menuLinks = document.querySelectorAll('.nav-menu a, a[href="#contact"], a[href="#iletisim"]');
-        const navMenu = document.querySelector('.nav-menu'); 
-    // Eğer hamburger ikonun da animasyonluysa (çarpı oluyorsa) onun class'ını da buraya eklemelisin:
-    // const hamburgerBtn = document.querySelector('.hamburger'); 
-
-        menuLinks.forEach(link => {
+    allMobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-     // Menüyü kapat
-        navMenu.classList.remove('active');
-        
-        // Eğer ikon animasyonu varsa onu da kapatmak için:
-        // if(hamburgerBtn) hamburgerBtn.classList.remove('active');
+        closeMenu(); // Zaten kodunda olan menü kapatma fonksiyonunu çağırır
         });
     });
 
@@ -961,12 +971,19 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         function tiltCard(e, card) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-            const centerX = rect.width / 2; const centerY = rect.height / 2;
-            const rotateX = (centerY - y) / 15; const rotateY = (x - centerX) / 15;
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-        }
+        // Mobilde tilt (eğilme) efektini iptal et, işlemciyi yorma
+    if (window.innerWidth < 768) return; 
+
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left; 
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2; 
+        const centerY = rect.height / 2;
+        const rotateX = (centerY - y) / 15; 
+        const rotateY = (x - centerX) / 15;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    }
+        
         function resetCard(card) { card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`; }
 
         const canvas = document.getElementById('canvas-bg'); const ctx = canvas.getContext('2d');
@@ -983,7 +1000,13 @@
                 ctx.fill(); 
             }
         }
-        for(let i=0; i<50; i++) particles.push(new Particle());
+        // Mobilde 20, masaüstünde 50 parçacık (Performans optimizasyonu)
+        const particleCount = window.innerWidth < 768 ? 20 : 50; 
+
+        for(let i=0; i < particleCount; i++) {
+        particles.push(new Particle());
+        }
+
         function animate() {
             ctx.clearRect(0, 0, width, height);
             for(let i=0; i<particles.length; i++) {
